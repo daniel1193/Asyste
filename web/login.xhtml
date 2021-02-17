@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <!--<ui:composition template="login.xhtml">
+        
+    </ui:composition>-->
+    <h:head>
+        <title><ui:insert name="title" /> Login</title>
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <h:outputStylesheet library="js" name="jsfcrud.js"/>
+    </h:head>
+    <h:body>
+        <h:form class="miForm">
+            <!--*create content for every items-->
+            <div class="ui-fluid" id="itemsForm">
+                <p:graphicImage library="assets" name="logo.jpg" class="logoLogin" width="50px" height="50px"/>
+                <h3 class="textoCentrado - arial">Ingresar a Asyste</h3>
+                <p:separator/>
+                <h5 class="arial">Ingresa para acceder a todos nuestro sitema.</h5>
+                <div class="p-field">
+                    <h:outputLabel for="usuario" value="Usuario:" class="arial"/>
+                    <p:inputText id="usuario" value="#{usuarioController.usuario.usuario}" required="true" requiredMessage="Usuario Requerido"/>
+                </div>
+                <div>
+                    <h:outputLabel value="Contraseña:" class="arial" />
+                    <p:password value="#{usuarioController.usuario.contraseña}" required="true" requiredMessage="Contraseña Requerida"/>
+                </div>               
+                <br></br>
+                <p:growl id="growl" life="2000" />
+                <!--the action is a methos used in the cotroller-->
+                <p:commandButton value="Iniciar"  update="@form" action="#{usuarioController.iniciarSesion()}"/>
+                <!--action = String(metodo y redireccion)
+                actionListener= void(metodo)-->
+            </div>
+        </h:form>
+        <p>Queremos asegurar una satisfaccion a todos nuestros usuarios.</p>
+    </h:body>
+</html>
+
