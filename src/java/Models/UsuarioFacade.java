@@ -32,7 +32,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     
     //===========================================MIS CAMBIOS
     //este es el metodo que hace la busqueda de la persona en la base de datos
-    public Usuario iniciarSesion(Usuario us){
+    public Usuario iniciarSesion(Usuario user){
         Usuario usuario = null;
         String consulta;
         try{
@@ -41,8 +41,8 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
             //usamos un query ara declarar la constulta a al base de datos
             //importamos query
             Query query = em.createQuery(consulta);
-            query.setParameter(1, us.getUsuario());
-            query.setParameter(2, us.getContraseña());
+            query.setParameter(1, user.getUsuario());
+            query.setParameter(2, user.getContraseña());
             //creamos una lista para contener el objeto que nos da la consulta
             //de acuerso al objeto que estamos mapeando
             List <Usuario> lista = query.getResultList();
