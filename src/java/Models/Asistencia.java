@@ -40,7 +40,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Asistencia.findByIdAsistencia", query = "SELECT a FROM Asistencia a WHERE a.idAsistencia = :idAsistencia")
     , @NamedQuery(name = "Asistencia.findByFecha", query = "SELECT a FROM Asistencia a WHERE a.fecha = :fecha")
     , @NamedQuery(name = "Asistencia.findByHoradeingreso", query = "SELECT a FROM Asistencia a WHERE a.horadeingreso = :horadeingreso")
-    , @NamedQuery(name = "Asistencia.findByHoradesalida", query = "SELECT a FROM Asistencia a WHERE a.horadesalida = :horadesalida")})
+    , @NamedQuery(name = "Asistencia.findByHoradesalida", query = "SELECT a FROM Asistencia a WHERE a.horadesalida = :horadesalida")
+    //consulta para traer las asistencias por el id del usuario, solo esta linea
+    , @NamedQuery(name = "Asistencia.getAsistenciasAprendizByIdUsuario", query = "SELECT a FROM Asistencia a WHERE a.personaIdPersona.usuarioidUsuario.idUsuario = :IdUsuario")})
 public class Asistencia implements Serializable {
 
     private static final long serialVersionUID = 1L;
