@@ -44,6 +44,16 @@ public class UsuarioController implements Serializable {
     public UsuarioController() {
     }
     
+    //Creacion de sesion para acceder al usuario que esta en el sistema
+    //sesion para el usuari registrado
+    public Usuario usuarioSesion(){
+        Usuario user = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+        if (user == null){
+            
+        }
+        return user;
+    }
+    
     @PostConstruct
     public void init(){
         usuario = new Usuario();
@@ -52,17 +62,18 @@ public class UsuarioController implements Serializable {
      //Uso el metodo del archivo facade
     public String iniciarSesion(){
         //creamos un objeto de tipo usuario
-        Usuario us;
+        Usuario user;
         String redireccion = null;
         try{
             //aqui aplicamos el metodo iniciarSesion que nos devuelve una persona de acuerdo
             //a los datos capturados
-            us = EJBUsuario.iniciarSesion(usuario);
+            user = getFacade().iniciarSesion(usuario);
             //Primero, si los campos del logueo son conrrectos se hace la redireccion
             //Segundo, hay que validar cual es el rol de nuestro ususario
-            if(us != null){
-                if(us.getTipodeusuarioidTipodeusuario().getNombre().equals("instructor")){
+            if(user != null){
+                if(user.getTipodeusuarioidTipodeusuario().getNombre().equals("instructor")){
                     redireccion = "tamplateEntitys";
+                    //"paginasAprendiz/templateAprendiz"
                 }
             }else{
                 //si no, quiere decir que esa persona no esta registrada en el sistema
