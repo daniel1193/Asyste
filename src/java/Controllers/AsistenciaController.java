@@ -27,6 +27,16 @@ public class AsistenciaController implements Serializable {
     private Models.AsistenciaFacade ejbFacade;
     private List<Asistencia> items = null;
     private Asistencia selected;
+    //La variable de tipo user fue creada por que quise hacerlo como en el repositorio
+    private Usuario usuario;
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
     public AsistenciaController() {
     }
@@ -78,6 +88,14 @@ public class AsistenciaController implements Serializable {
         if (items == null) {
             items = getFacade().findAll();
         }
+        return items;
+    }
+    //creacion de la lista para guardar las asistencias dependiendo del usuario
+    public List<Asistencia> getItemsByAprendiz(){
+        items = null;
+        UsuarioController usuarioC = new UsuarioController();
+        //
+        items = getFacade().getAsistenciasAprendizByIdUsuario(usuarioC.getUsuarioSesion().getIdUsuario());
         return items;
     }
 
