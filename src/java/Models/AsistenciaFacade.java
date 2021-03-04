@@ -28,4 +28,11 @@ public class AsistenciaFacade extends AbstractFacade<Asistencia> {
         super(Asistencia.class);
     }
     
+    //se crea el metodo declarado en la consulta del modelo
+    public List<Asistencia> getAsistenciasAprendizByIdUsuario(Integer IdUsuario){
+        List<Asistencia> asistencias = new ArrayList<>();
+        asistencias = getEntityManager().createNamedQuery("Asistencia.getAsistenciasAprendizByIdUsuario", Asistencia.class).setParameter("IdUsuario",IdUsuario).getResultList();       
+        return asistencias;
+    }
+    
 }
