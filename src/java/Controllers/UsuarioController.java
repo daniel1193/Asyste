@@ -45,7 +45,7 @@ public class UsuarioController implements Serializable {
     }
     
     //Creacion de sesion para acceder al usuario que esta en el sistema
-    //sesion para el usuari registrado
+    //sesion para el usuari registrado: se obtiene pero antes debe crearse o ponerse
     public Usuario usuarioSesion(){
         Usuario user = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
         if (user == null){
@@ -71,6 +71,8 @@ public class UsuarioController implements Serializable {
             //Primero, si los campos del logueo son conrrectos se hace la redireccion
             //Segundo, hay que validar cual es el rol de nuestro ususario
             if(user != null){
+                //si el usuario esta logueado ponemos su sesion para despues obtenerla
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", user);
                 if(user.getTipodeusuarioidTipodeusuario().getNombre().equals("instructor")){
                     redireccion = "tamplateEntitys";
                     //"paginasAprendiz/templateAprendiz"
