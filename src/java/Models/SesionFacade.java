@@ -14,7 +14,7 @@ import javax.persistence.PersistenceContext;
  * @author Daniel
  */
 @Stateless
-public class AsistenciaFacade extends AbstractFacade<Asistencia> {
+public class SesionFacade extends AbstractFacade<Sesion> {
 
     @PersistenceContext(unitName = "Asyste3PU")
     private EntityManager em;
@@ -24,8 +24,8 @@ public class AsistenciaFacade extends AbstractFacade<Asistencia> {
         return em;
     }
 
-    public AsistenciaFacade() {
-        super(Asistencia.class);
+    public SesionFacade() {
+        super(Sesion.class);
     }
     
 }

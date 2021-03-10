@@ -9,8 +9,8 @@
         <h:outputStylesheet name="css/jsfcrud.css"/>
     </h:head>
     <h:body>
-        <ui:composition template="templateindex.xhtml">
-            <ui:define name="login">
+        <ui:composition template="template.xhtml"></ui:composition>
+<!--            <ui:define name="login">-->
                 <!--contenido
                 Hello from Facelets
                 <br />
@@ -48,25 +48,31 @@
                 <br />
                 <h:link outcome="/Views/usuario/List" value="Show All Usuario Items"/>-->
                 <!--<div class="box1"></div>-->
-                <div class="box">
+<!--                <div class="box">
                     <h3 id="title_login">Iniciar sesión</h3>
                     <h:form>
-                    <h:panelGrid columns="1">
-                        <p:outputLabel for="usuario" value="Usuario"/>
-                        <p:inputText id="usuario" required="true"/>
-                        <p:outputLabel for="contraseña" value="Contraseña" />
-                        <p:inputText  id="contraseña" required="true"/>
-                        <h:message for="usuario"/>
-                        <p:column/>
-                        <p:commandButton class="btn-iniciar" icon="ui-icon-key" value="Iniciar" style="color: red;"/>
-                    </h:panelGrid>
-                    <p:separator/>
-                    <h:link value="Crear cuenta" outcome="index" style="color: red;"/>
-                </h:form>
+                        <h:panelGrid columns="1">
+                            <p:outputLabel for="usuario" value="Usuario"/>
+                            <p:inputText id="usuario" required="true"/>
+                            <p:outputLabel for="contraseña" value="Contraseña" />
+                            <p:inputText  id="contraseña" required="true"/>
+                            <h:message for="usuario"/>
+                            <p:column/>
+                            <p:commandButton class="btn-iniciar" icon="ui-icon-key" value="Iniciar" style="color: red;"/>
+                        </h:panelGrid>
+                        <p:separator/>
+                        <h:link value="Crear cuenta" outcome="index" style="color: red;"/>
+                    </h:form>
                 </div>
             </ui:define>
         </ui:composition>
+        <br />
+        <h:link outcome="/Views/sesion/List" value="Show All Sesion Items"/>
+        <br />
+        <h:link outcome="/Views/usuario/List" value="Show All Usuario Items"/>-->
     </h:body>
+
+
 
 </html>
 

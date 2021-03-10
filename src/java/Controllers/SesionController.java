@@ -1,9 +1,9 @@
 package Controllers;
 
-import Models.Asistencia;
+import Models.Sesion;
 import Controllers.util.JsfUtil;
 import Controllers.util.JsfUtil.PersistAction;
-import Models.AsistenciaFacade;
+import Models.SesionFacade;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,23 +19,23 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-@Named("asistenciaController")
+@Named("sesionController")
 @SessionScoped
-public class AsistenciaController implements Serializable {
+public class SesionController implements Serializable {
 
     @EJB
-    private Models.AsistenciaFacade ejbFacade;
-    private List<Asistencia> items = null;
-    private Asistencia selected;
+    private Models.SesionFacade ejbFacade;
+    private List<Sesion> items = null;
+    private Sesion selected;
 
-    public AsistenciaController() {
+    public SesionController() {
     }
 
-    public Asistencia getSelected() {
+    public Sesion getSelected() {
         return selected;
     }
 
-    public void setSelected(Asistencia selected) {
+    public void setSelected(Sesion selected) {
         this.selected = selected;
     }
 
@@ -45,36 +45,36 @@ public class AsistenciaController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private AsistenciaFacade getFacade() {
+    private SesionFacade getFacade() {
         return ejbFacade;
     }
 
-    public Asistencia prepareCreate() {
-        selected = new Asistencia();
+    public Sesion prepareCreate() {
+        selected = new Sesion();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Lang/Bundle").getString("AsistenciaCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Lang/Bundle").getString("SesionCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Lang/Bundle").getString("AsistenciaUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Lang/Bundle").getString("SesionUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Lang/Bundle").getString("AsistenciaDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Lang/Bundle").getString("SesionDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Asistencia> getItems() {
+    public List<Sesion> getItems() {
         if (items == null) {
             items = getFacade().findAll();
         }
@@ -109,29 +109,29 @@ public class AsistenciaController implements Serializable {
         }
     }
 
-    public Asistencia getAsistencia(java.lang.Integer id) {
+    public Sesion getSesion(java.lang.Integer id) {
         return getFacade().find(id);
     }
 
-    public List<Asistencia> getItemsAvailableSelectMany() {
+    public List<Sesion> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<Asistencia> getItemsAvailableSelectOne() {
+    public List<Sesion> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Asistencia.class)
-    public static class AsistenciaControllerConverter implements Converter {
+    @FacesConverter(forClass = Sesion.class)
+    public static class SesionControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            AsistenciaController controller = (AsistenciaController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "asistenciaController");
-            return controller.getAsistencia(getKey(value));
+            SesionController controller = (SesionController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "sesionController");
+            return controller.getSesion(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -151,11 +151,11 @@ public class AsistenciaController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Asistencia) {
-                Asistencia o = (Asistencia) object;
-                return getStringKey(o.getIdAsistencia());
+            if (object instanceof Sesion) {
+                Sesion o = (Sesion) object;
+                return getStringKey(o.getIdSesion());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Asistencia.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Sesion.class.getName()});
                 return null;
             }
         }

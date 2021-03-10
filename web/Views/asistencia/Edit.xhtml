@@ -41,6 +41,13 @@
                                            var="personaIdPersonaItem"
                                            itemValue="#{personaIdPersonaItem}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditAsistenciaLabel_sesionidSesion}" for="sesionidSesion" />
+                        <p:selectOneMenu id="sesionidSesion" value="#{asistenciaController.selected.sesionidSesion}" required="true" requiredMessage="#{bundle.EditAsistenciaRequiredMessage_sesionidSesion}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{sesionController.itemsAvailableSelectOne}"
+                                           var="sesionidSesionItem"
+                                           itemValue="#{sesionidSesionItem}"/>
+                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{asistenciaController.update}" value="#{bundle.Save}" update="display,:AsistenciaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AsistenciaEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="AsistenciaEditDialog.hide()"/>

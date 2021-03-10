@@ -38,6 +38,12 @@
                                            var="personaIdPersonaItem"
                                            itemValue="#{personaIdPersonaItem}"/>
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAsistenciaLabel_sesionidSesion}" for="sesionidSesion" />
+                        <p:selectOneMenu id="sesionidSesion" value="#{asistenciaController.selected.sesionidSesion}" required="true" requiredMessage="#{bundle.EditAsistenciaRequiredMessage_sesionidSesion}">
+                            <f:selectItems value="#{sesionController.itemsAvailableSelectOne}"
+                                           var="sesionidSesionItem"
+                                           itemValue="#{sesionidSesionItem}"/>
+                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{asistenciaController.create}" value="#{bundle.Save}" update="display,:AsistenciaListForm:datalist,:growl" oncomplete="handleSubmit(args,'AsistenciaCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="AsistenciaCreateDialog.hide()"/>

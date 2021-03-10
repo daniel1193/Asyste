@@ -46,6 +46,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Ficha.findByHorafin", query = "SELECT f FROM Ficha f WHERE f.horafin = :horafin")})
 public class Ficha implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fichaidFicha")
+    private Collection<Sesion> sesionCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -223,6 +226,15 @@ public class Ficha implements Serializable {
     @Override
     public String toString() {
         return numero;
+    }
+
+    @XmlTransient
+    public Collection<Sesion> getSesionCollection() {
+        return sesionCollection;
+    }
+
+    public void setSesionCollection(Collection<Sesion> sesionCollection) {
+        this.sesionCollection = sesionCollection;
     }
     
 }

@@ -45,6 +45,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Asistencia.getAsistenciasAprendizByIdUsuario", query = "SELECT a FROM Asistencia a WHERE a.personaIdPersona.usuarioidUsuario.idUsuario = :IdUsuario")})
 public class Asistencia implements Serializable {
 
+    @JoinColumn(name = "Sesion_idSesion", referencedColumnName = "idSesion")
+    @ManyToOne(optional = false)
+    private Sesion sesionidSesion;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -180,6 +184,14 @@ public class Asistencia implements Serializable {
     @Override
     public String toString() {
         return "" + fecha;
+    }
+
+    public Sesion getSesionidSesion() {
+        return sesionidSesion;
+    }
+
+    public void setSesionidSesion(Sesion sesionidSesion) {
+        this.sesionidSesion = sesionidSesion;
     }
     
 }

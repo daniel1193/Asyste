@@ -4,14 +4,12 @@ import Models.Usuario;
 import Controllers.util.JsfUtil;
 import Controllers.util.JsfUtil.PersistAction;
 import Models.UsuarioFacade;
-import Models.UsuarioFacadeLocal;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -24,7 +22,11 @@ import javax.faces.convert.FacesConverter;
 @Named("usuarioController")
 @SessionScoped
 public class UsuarioController implements Serializable {
-    
+
+    @EJB
+    private Models.UsuarioFacade ejbFacade;
+    private List<Usuario> items = null;
+    private Usuario selected;
     private Usuario usuario;
 
     public Usuario getUsuario() {
@@ -35,57 +37,7 @@ public class UsuarioController implements Serializable {
         this.usuario = usuario;
     }
 
-    @EJB
-    private UsuarioFacadeLocal EJBUsuario;
-    private Models.UsuarioFacade ejbFacade;
-    private List<Usuario> items = null;
-    private Usuario selected;
-
     public UsuarioController() {
-    }
-    
-    //Creacion de sesion para acceder al usuario que esta en el sistema
-    //sesion para el usuari registrado: se obtiene pero antes debe crearse o ponerse
-    public Usuario usuarioSesion(){
-        Usuario user = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
-        if (user == null){
-            
-        }
-        return user;
-    }
-    
-    @PostConstruct
-    public void init(){
-        usuario = new Usuario();
-    }
-    
-     //Uso el metodo del archivo facade
-    public String iniciarSesion(){
-        //creamos un objeto de tipo usuario
-        Usuario user;
-        String redireccion = null;
-        try{
-            //aqui aplicamos el metodo iniciarSesion que nos devuelve una persona de acuerdo
-            //a los datos capturados
-            user = getFacade().iniciarSesion(usuario);
-            //Primero, si los campos del logueo son conrrectos se hace la redireccion
-            //Segundo, hay que validar cual es el rol de nuestro ususario
-            if(user != null){
-                //si el usuario esta logueado ponemos su sesion para despues obtenerla
-                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", user);
-                if(user.getTipodeusuarioidTipodeusuario().getNombre().equals("instructor")){
-                    redireccion = "tamplateEntitys";
-                    //"paginasAprendiz/templateAprendiz"
-                }
-            }else{
-                //si no, quiere decir que esa persona no esta registrada en el sistema
-                //usamos un faces context para dar una notificacion
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Usuario o contraseña invalidos","Error"));
-            }
-        }catch(Exception e){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error interno","Error"));
-        }
-        return redireccion;
     }
 
     public Usuario getSelected() {
