@@ -18,7 +18,6 @@
         <h:form class="miForm">
             <!--*create content for every items-->
             <div class="ui-fluid" id="itemsForm">
-                <p:graphicImage library="assets" name="logo.jpg" class="logoLogin" width="50px" height="50px"/>
                 <h3 class="textoCentrado - arial">Ingresar a Asyste</h3>
                 <p:separator/>
                 <h5 class="arial">Ingresa para acceder a todos nuestro sitema.</h5>
@@ -27,8 +26,8 @@
                     <p:inputText id="usuario" value="#{usuarioController.usuario.usuario}" required="true" requiredMessage="Usuario Requerido"/>
                 </div>
                 <div>
-                    <h:outputLabel value="Contraseña:" class="arial" />
-                    <p:password value="#{usuarioController.usuario.contraseña}" required="true" requiredMessage="Contraseña Requerida"/>
+                    <h:outputLabel for="contraseña" value="Contraseña:" class="arial" />
+                    <p:password id="contraseña" value="#{usuarioController.usuario.contraseña}" required="true" requiredMessage="Contraseña Requerida"/>
                 </div>               
                 <br></br>
                 <p:growl id="growl" life="2000" />

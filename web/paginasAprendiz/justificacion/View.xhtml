@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="JustificacionViewDlg" widgetVar="JustificacionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewJustificacionTitle}">
+            <h:form id="JustificacionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{justificacionController.selected != null}">
+                        <h:outputText value="#{bundle.ViewJustificacionLabel_idJustifcaion}"/>
+                        <h:outputText value="#{justificacionController.selected.idJustifcaion}" title="#{bundle.ViewJustificacionTitle_idJustifcaion}"/>
+                        <h:outputText value="#{bundle.ViewJustificacionLabel_fecha}"/>
+                        <h:outputText value="#{justificacionController.selected.fecha}" title="#{bundle.ViewJustificacionTitle_fecha}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewJustificacionLabel_descripcion}"/>
+                        <h:outputText value="#{justificacionController.selected.descripcion}" title="#{bundle.ViewJustificacionTitle_descripcion}"/>
+                        <h:outputText value="#{bundle.ViewJustificacionLabel_evidencia}"/>
+                        <h:outputText value="#{justificacionController.selected.evidencia}" title="#{bundle.ViewJustificacionTitle_evidencia}"/>
+                        <h:outputText value="#{bundle.ViewJustificacionLabel_asistenciaidAsistencia}"/>
+                        <h:outputText value="#{justificacionController.selected.asistenciaidAsistencia}" title="#{bundle.ViewJustificacionTitle_asistenciaidAsistencia}"/>
+                        <h:outputText value="#{bundle.ViewJustificacionLabel_eventoidEvento}"/>
+                        <h:outputText value="#{justificacionController.selected.eventoidEvento}" title="#{bundle.ViewJustificacionTitle_eventoidEvento}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="JustificacionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

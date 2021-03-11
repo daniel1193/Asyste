@@ -4,6 +4,7 @@ import Models.Asistencia;
 import Controllers.util.JsfUtil;
 import Controllers.util.JsfUtil.PersistAction;
 import Models.AsistenciaFacade;
+import Models.Usuario;
 
 import java.io.Serializable;
 import java.util.List;
@@ -27,8 +28,17 @@ public class AsistenciaController implements Serializable {
     private Models.AsistenciaFacade ejbFacade;
     private List<Asistencia> items = null;
     private Asistencia selected;
-
+    private Usuario usuario;
+    
     public AsistenciaController() {
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Asistencia getSelected() {
@@ -74,6 +84,14 @@ public class AsistenciaController implements Serializable {
         }
     }
 
+    //creacion de la lista para guardar las asistencias dependiendo del usuario
+    public List<Asistencia> getItemsByAprendiz(){
+        items = null;
+        UsuarioController usuarioC = new UsuarioController();
+        items = getFacade().getAsistenciasAprendizByIdUsuario(usuarioC.usuarioSesion().getIdUsuario());
+        return items;
+    }
+    
     public List<Asistencia> getItems() {
         if (items == null) {
             items = getFacade().findAll();

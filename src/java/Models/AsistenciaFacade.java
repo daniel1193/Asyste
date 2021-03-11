@@ -5,6 +5,8 @@
  */
 package Models;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,5 +29,13 @@ public class AsistenciaFacade extends AbstractFacade<Asistencia> {
     public AsistenciaFacade() {
         super(Asistencia.class);
     }
+    
+    public List<Asistencia> getAsistenciasAprendizByIdUsuario(Integer IdUsuario){
+        List<Asistencia> asistencias = new ArrayList<>();
+        asistencias = getEntityManager().createNamedQuery("Asistencia.getAsistenciasAprendizByIdUsuario", Asistencia.class).setParameter("IdUsuario",IdUsuario).getResultList();
+        System.out.println(asistencias);
+        return asistencias;
+    }
+    
     
 }

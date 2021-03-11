@@ -10,10 +10,12 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -39,6 +41,52 @@ public class UsuarioController implements Serializable {
 
     public UsuarioController() {
     }
+    
+    //Creacion de sesion para acceder al usuario que esta en el sistema
+    //sesion para el usuari registrado: se obtiene pero antes debe crearse o ponerse
+    public Usuario usuarioSesion(){
+        Usuario user = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+        if (user == null){
+
+        }
+        return user;
+    }
+
+    @PostConstruct
+    public void init(){
+        usuario = new Usuario();
+    }
+
+     //Uso el metodo del archivo facade
+    public String iniciarSesion(){
+        //creamos un objeto de tipo usuario
+        Usuario user;
+        String redireccion = null;
+        try{
+            //aqui aplicamos el metodo iniciarSesion que nos devuelve una persona de acuerdo
+            //a los datos capturados
+            user = getFacade().iniciarSesion(usuario);
+            //Primero, si los campos del logueo son conrrectos se hace la redireccion
+            //Segundo, hay que validar cual es el rol de nuestro ususario
+            if(user != null){
+                //si el usuario esta logueado ponemos su sesion para despues obtenerla
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", user);
+                if(user.getTipodeusuarioidTipodeusuario().getNombre().equals("aprendiz")){
+                    redireccion = "paginasAprendiz/templateAprendiz";
+                }else if(user.getTipodeusuarioidTipodeusuario().getNombre().equals("instructor")){
+                    redireccion = "paginasInstructor/templateInstructor";
+                }
+            }else{                
+                //si no, quiere decir que esa persona no esta registrada en el sistema
+                //usamos un faces context para dar una notificacion
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Verifica tu Usuario y contraseña","Error"));
+            }
+        }catch(Exception e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Error interno","Error"));
+        }
+        return redireccion;
+    }
+
 
     public Usuario getSelected() {
         return selected;

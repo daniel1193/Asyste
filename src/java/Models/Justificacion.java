@@ -36,7 +36,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Justificacion.findByIdJustifcaion", query = "SELECT j FROM Justificacion j WHERE j.idJustifcaion = :idJustifcaion")
     , @NamedQuery(name = "Justificacion.findByFecha", query = "SELECT j FROM Justificacion j WHERE j.fecha = :fecha")
     , @NamedQuery(name = "Justificacion.findByDescripcion", query = "SELECT j FROM Justificacion j WHERE j.descripcion = :descripcion")
-    , @NamedQuery(name = "Justificacion.findByEvidencia", query = "SELECT j FROM Justificacion j WHERE j.evidencia = :evidencia")})
+    , @NamedQuery(name = "Justificacion.findByEvidencia", query = "SELECT j FROM Justificacion j WHERE j.evidencia = :evidencia")
+        //consulta para obtener las justificaciones
+    , @NamedQuery(name = "Justificacion.getJustificacionByIdUsuario", query="SELECT j FROM Justificacion j WHERE j.asistenciaidAsistencia.personaIdPersona.usuarioidUsuario.idUsuario = :IdUsuario")})
 public class Justificacion implements Serializable {
 
     private static final long serialVersionUID = 1L;

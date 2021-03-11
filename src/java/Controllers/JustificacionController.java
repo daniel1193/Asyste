@@ -4,6 +4,7 @@ import Models.Justificacion;
 import Controllers.util.JsfUtil;
 import Controllers.util.JsfUtil.PersistAction;
 import Models.JustificacionFacade;
+import Models.Usuario;
 
 import java.io.Serializable;
 import java.util.List;
@@ -27,6 +28,17 @@ public class JustificacionController implements Serializable {
     private Models.JustificacionFacade ejbFacade;
     private List<Justificacion> items = null;
     private Justificacion selected;
+    //se usan la variable de tipo Usuario y sus gettter and setter por que 
+    //el metodo para listar excusas, asi que retorna un usuario
+    private Usuario usuario;
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
     public JustificacionController() {
     }
@@ -74,6 +86,14 @@ public class JustificacionController implements Serializable {
         }
     }
 
+    //metodo de tipo lista para traerlas excusas por persona logueda
+    public List<Justificacion> getItemsJustificacionByIdUsuario(){
+        items = null;
+        UsuarioController usuarioC = new UsuarioController();
+        items = getFacade().getJustificacionByIdUsuario(usuarioC.usuarioSesion().getIdUsuario());
+        return items;
+    }
+    
     public List<Justificacion> getItems() {
         if (items == null) {
             items = getFacade().findAll();
