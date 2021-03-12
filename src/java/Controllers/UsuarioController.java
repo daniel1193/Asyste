@@ -74,7 +74,7 @@ public class UsuarioController implements Serializable {
                 if(user.getTipodeusuarioidTipodeusuario().getNombre().equals("aprendiz")){
                     redireccion = "paginasAprendiz/templateAprendiz";
                 }else if(user.getTipodeusuarioidTipodeusuario().getNombre().equals("instructor")){
-                    redireccion = "paginasInstructor/templateInstructor";
+                    redireccion = "templateInstructor";
                 }
             }else{                
                 //si no, quiere decir que esa persona no esta registrada en el sistema

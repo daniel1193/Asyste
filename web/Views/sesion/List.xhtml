@@ -31,7 +31,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSesionTitle_idSesion}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idSesion}"/>
+                            <p:commandLink value="#{item.idSesion}" action="#{sesionController.renderPage(item.idSesion)}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -27,8 +28,37 @@ public class SesionController implements Serializable {
     private Models.SesionFacade ejbFacade;
     private List<Sesion> items = null;
     private Sesion selected;
+    private Sesion sesion;
 
+    public Sesion getSesion() {
+        return sesion;
+    }
+
+    public void setSesion(Sesion sesion) {
+        this.sesion = sesion;
+    }
     public SesionController() {
+    }
+    @PostConstruct
+    void init(){
+        sesion = new Sesion();
+    }
+    
+    //my changes for render to a page
+    public String renderPage(Integer IdSesion){
+        //int numeroSesion;
+        //numeroSesion = IdSesion;
+        System.out.println(IdSesion);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("IdSesion", IdSesion);        
+        return "/Views/asistencia/asistenciasSesion";
+    }
+    
+    public Integer getSesionNumber(){
+        //se crea una varible y su parseo de tipo entero por que accedo a un dato en especifico
+        //y no aun objeto en general
+        int numeroSesion = (int) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("IdSesion");
+        System.out.println("Id en sesionController: " + numeroSesion);
+        return numeroSesion;
     }
 
     public Sesion getSelected() {

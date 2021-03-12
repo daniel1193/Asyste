@@ -42,7 +42,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Asistencia.findByHoradeingreso", query = "SELECT a FROM Asistencia a WHERE a.horadeingreso = :horadeingreso")
     , @NamedQuery(name = "Asistencia.findByHoradesalida", query = "SELECT a FROM Asistencia a WHERE a.horadesalida = :horadesalida")
     //consulta para traer las asistencias por el id del usuario, solo esta linea
-    , @NamedQuery(name = "Asistencia.getAsistenciasAprendizByIdUsuario", query = "SELECT a FROM Asistencia a WHERE a.personaIdPersona.usuarioidUsuario.idUsuario = :IdUsuario")})
+    , @NamedQuery(name = "Asistencia.getAsistenciasAprendizByIdUsuario", query = "SELECT a FROM Asistencia a WHERE a.personaIdPersona.usuarioidUsuario.idUsuario = :IdUsuario")
+        //consulta para buscar asistencias por sesion
+    , @NamedQuery(name = "Asistencia.getAsistenciasByIdSesion", query="SELECT a FROM Asistencia a WHERE a.sesionidSesion.idSesion = :IdSesion")})
 public class Asistencia implements Serializable {
 
     @JoinColumn(name = "Sesion_idSesion", referencedColumnName = "idSesion")

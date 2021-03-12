@@ -37,5 +37,11 @@ public class AsistenciaFacade extends AbstractFacade<Asistencia> {
         return asistencias;
     }
     
+    //lista de asistencias por id sesion
+    public List<Asistencia> getAsistenciasByIdSesion(Integer IdSesion){
+        List<Asistencia> asistenciasBySesion = new ArrayList<>();
+        asistenciasBySesion = getEntityManager().createNamedQuery("Asistencia.getAsistenciasByIdSesion", Asistencia.class).setParameter("IdSesion",IdSesion).getResultList();
+        return asistenciasBySesion;
+    }
     
 }

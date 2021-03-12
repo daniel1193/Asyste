@@ -4,6 +4,7 @@ import Models.Asistencia;
 import Controllers.util.JsfUtil;
 import Controllers.util.JsfUtil.PersistAction;
 import Models.AsistenciaFacade;
+import Models.Sesion;
 import Models.Usuario;
 
 import java.io.Serializable;
@@ -29,6 +30,16 @@ public class AsistenciaController implements Serializable {
     private List<Asistencia> items = null;
     private Asistencia selected;
     private Usuario usuario;
+    private Sesion sesion;
+
+    public Sesion getSesion() {
+        return sesion;
+    }
+
+    public void setSesion(Sesion sesion) {
+        this.sesion = sesion;
+    }
+    
     
     public AsistenciaController() {
     }
@@ -89,6 +100,15 @@ public class AsistenciaController implements Serializable {
         items = null;
         UsuarioController usuarioC = new UsuarioController();
         items = getFacade().getAsistenciasAprendizByIdUsuario(usuarioC.usuarioSesion().getIdUsuario());
+        return items;
+    }
+    
+    //creacion de lista para guardar datos de asistencias por id sesion
+    public List<Asistencia> getItemsBySesion(){
+        items = null;
+        SesionController sesionC = new SesionController();
+        items = getFacade().getAsistenciasByIdSesion(sesionC.getSesionNumber());
+        System.out.println("Id numero: " + sesionC.getSesionNumber());
         return items;
     }
     
